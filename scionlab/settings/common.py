@@ -176,3 +176,7 @@ except IOError:
 
 # ##### SCALING AND PERFORMANCE #####################
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10000
+
+CRONJOBS = [
+    ('*/2 * * * *', 'myapp.cron.my_cron_job')
+]
