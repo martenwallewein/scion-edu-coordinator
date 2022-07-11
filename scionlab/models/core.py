@@ -208,8 +208,8 @@ class AS(TimestampedModel):
     as_id = models.CharField(
         max_length=15,
         validators=[
-            RegexValidator(regex=as_ids.REGEX),
-            RegexValidator(regex=r"0+:0+:0+", inverse_match=True),
+            # RegexValidator(regex=as_ids.REGEX),
+            # RegexValidator(regex=r"0+:0+:0+", inverse_match=True),
         ],
         verbose_name='AS-ID'
     )

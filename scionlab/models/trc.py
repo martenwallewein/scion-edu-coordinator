@@ -20,11 +20,11 @@
 from collections import defaultdict
 from django.db import models
 
-from scionlab.defines import DEFAULT_TRC_GRACE_PERIOD
+from scionlab.defines import DEFAULT_TRC_GRACE_PERIOD,DEFAULT_EXPIRATION_TRC_YEARS
 from scionlab.models.core import AS
 from scionlab.models.pki import Certificate, Key, validity
 from scionlab.scion import trcs
-
+import datetime
 
 class TRCManager(models.Manager):
     def create(self, isd):
@@ -110,7 +110,8 @@ class TRCManager(models.Manager):
             not_before, not_after = validity(*[*certificates])  # 'certificates' covers everything
 
         votes_idx = prev.get_certificate_indices(votes) if prev else []
-
+        d = datetime.datetime.now() 
+        endDate = d.replace(year=d.year + DEFAULT_EXPIRATION_TRC_YEARS)
         trc = trcs.generate_trc(
             prev_trc=prev.trc if prev else None,
             isd_id=isd.isd_id,
@@ -121,7 +122,7 @@ class TRCManager(models.Manager):
             votes=votes_idx,
             grace_period=DEFAULT_TRC_GRACE_PERIOD,
             not_before=not_before,
-            not_after=not_after,
+            not_after= endDate, #TODO: Maybe put to another location not_after,
             certificates=[c.certificate for c in certificates],
             signers_certs=[s.certificate for s in signers],
             signers_keys=[s.key.key for s in signers],

@@ -64,6 +64,7 @@ OPENVPN_CONFIG_DIR = "/etc/openvpn"
 
 # Default expiration time for keys; we currently only distinguish between core/non-core keys.
 # Note: the expiration of the core keys also defines the expiration of the TRCs.
-DEFAULT_EXPIRATION_AS_KEYS = datetime.timedelta(days=365)
-DEFAULT_EXPIRATION_CORE_KEYS = datetime.timedelta(days=2*365)
+DEFAULT_EXPIRATION_AS_KEYS = datetime.timedelta(days=14)
+DEFAULT_EXPIRATION_CORE_KEYS = datetime.timedelta(days=5*365)
+DEFAULT_EXPIRATION_TRC_YEARS = 1
 DEFAULT_TRC_GRACE_PERIOD = datetime.timedelta(hours=6)

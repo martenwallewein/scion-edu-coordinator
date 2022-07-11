@@ -180,7 +180,7 @@ class Key(models.Model):
         if usage in [Key.TRC_VOTING_SENSITIVE,
                      Key.TRC_VOTING_REGULAR,
                      Key.ISSUING_ROOT,
-                     Key.ISSUING_CA]:
+                     Key.ISSUING_CA]: # TODO: Check expiration date for CA certs
             return DEFAULT_EXPIRATION_CORE_KEYS
         else:
             return DEFAULT_EXPIRATION_AS_KEYS

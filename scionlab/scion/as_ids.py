@@ -45,6 +45,8 @@ def parse(as_id_str):
     :param str as_id_str: AS-identifier to parse
     :returns: AS-identifier as integer
     """
+    if as_id_str.isnumeric():
+        return int(as_id_str)
     match = REGEX.match(as_id_str)
     if not match:
         raise ValueError('Invalid AS-ID')
